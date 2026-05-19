@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user preferences and basic info.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID from Firebase Auth." },
+        "displayName": { "type": "string", "description": "User's display name." },
+        "photoURL": { "type": "string", "description": "User's profile picture URL." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the profile was created." }
+      },
+      "required": ["uid", "email"]
+    },
+    "SavedProblem": {
+      "title": "Saved Problem",
+      "description": "A DSA problem and solution saved by the user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Owner's user ID." },
+        "title": { "type": "string", "description": "Problem title." },
+        "problemText": { "type": "string", "description": "The DSA problem description." },
+        "code": { "type": "string", "description": "The JavaScript solution code." },
+        "explanation": { "type": "string", "description": "AI-generated explanation." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when saved." }
+      },
+      "required": ["uid", "title", "problemText", "code"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    },
+    "/saved_problems/{problemId}": {
+      "schema": "SavedProblem",
+      "description": "Collection of saved DSA problems."
+    }
+  }
+}
